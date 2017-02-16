@@ -61,5 +61,16 @@ namespace NumbersApp
       //Assert
       Assert.Equal("thirteen", newNumber.NumberWord());
     }
+
+    [Fact]
+    public void NumberWord_HundredTeen_Word()
+    {
+      //Arrange
+      string hundredTeen = "621,532";
+      //Act
+      Numbers newNumber = new Numbers(hundredTeen);
+      //Assert
+      Assert.Equal("six hundred five hundred thirty two", newNumber.NumberWord());
+    }
   }
 }

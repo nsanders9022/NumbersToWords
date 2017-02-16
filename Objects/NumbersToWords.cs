@@ -77,6 +77,7 @@ namespace NumbersApp.Objects
       string ones = "";
       string tens = "";
       string hundreds = "";
+      string hundredThousands = "";
       // string result = hundreds + tens + ones;
 
       //Hundreds
@@ -87,11 +88,17 @@ namespace NumbersApp.Objects
           if (pair.Key == numberArray[numberArray.Length-3])
           {
             hundreds = pair.Value + " ";
-            Console.WriteLine(hundreds);
+          }
+
+        if (numberArray.Length >=6)
+          {
+          if (pair.Key == numberArray[numberArray.Length-7])
+          {
+            hundredThousands = pair.Value + " ";
           }
         }
       }
-
+}
       //Zero
       if ((numberArray.Length == 1) && (numberArray[0] == '0'))
       {
@@ -129,8 +136,7 @@ namespace NumbersApp.Objects
           }
         }
       }
-
-      return hundreds + tens + ones;
+      return hundredThousands + hundreds + tens + ones;
     }
   }
 }
