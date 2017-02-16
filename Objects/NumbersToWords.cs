@@ -32,6 +32,19 @@ namespace NumbersApp.Objects
       {'8', "eighty"},
       {'9', "ninety"},
     };
+    public static Dictionary<char, string> hundredDict = new Dictionary<char, string>()
+    {
+      {'1', "one hundred"},
+      {'2', "two hundred"},
+      {'3', "three hundred"},
+      {'4', "four hundred"},
+      {'5', "five hundred"},
+      {'6', "six hundred"},
+      {'7', "seven hundred"},
+      {'8', "eight hundred"},
+      {'9', "nine hundred"},
+    };
+
 
     //constructor
     public Numbers(string newNumber)
@@ -51,23 +64,39 @@ namespace NumbersApp.Objects
       char[] numberArray = GetNumber().ToCharArray();
       string result = "";
 
-        if (numberArray.Length >1)
+      if (numberArray.Length >2)
+      {
+        foreach (KeyValuePair<char, string> pair in hundredDict)
         {
-          foreach (KeyValuePair<char, string> pair in doubleDict)
+          if (pair.Key == numberArray[numberArray.Length-3])
           {
-            if (pair.Key == numberArray[numberArray.Length-2])
-            {
-              result += pair.Value + " ";
-            }
+            result += pair.Value + " ";
           }
         }
-        foreach (KeyValuePair<char, string> pair in singleDict)
+      }
+
+      if (numberArray.Length >1)
+      {
+        foreach (KeyValuePair<char, string> pair in doubleDict)
         {
-          if (pair.Key == numberArray[numberArray.Length-1])
+          if (pair.Key == numberArray[numberArray.Length-2])
           {
-            result += pair.Value;
+            result += pair.Value + " ";
           }
         }
+      }
+      if ((numberArray.Length == 1) && (numberArray[0] == '0'))
+      {
+        result = "zero";
+      }
+
+      foreach (KeyValuePair<char, string> pair in singleDict)
+      {
+        if (pair.Key == numberArray[numberArray.Length-1])
+        {
+          result += pair.Value;
+        }
+      }
       return result;
     }
   }
