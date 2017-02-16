@@ -6,43 +6,69 @@ namespace NumbersApp.Objects
 {
   public class Numbers
   {
-    public int number;
-    public static Dictionary<int, string> singleDict = new Dictionary<int, string>()
+    public string _number;
+    public static Dictionary<char, string> singleDict = new Dictionary<char, string>()
     {
-      {0, ""},
-      {1, "one"},
-      {2, "two"},
-      {3, "three"},
-      {4, "four"},
-      {5, "five"},
-      {6, "six"},
-      {7, "seven"},
-      {8, "eight"},
-      {9, "nine"},
+      {'0', ""},
+      {'1', "one"},
+      {'2', "two"},
+      {'3', "three"},
+      {'4', "four"},
+      {'5', "five"},
+      {'6', "six"},
+      {'7', "seven"},
+      {'8', "eight"},
+      {'9', "nine"},
+    };
+
+    public static Dictionary<char, string> doubleDict = new Dictionary<char, string>()
+    {
+      {'2', "twenty"},
+      {'3', "thirty"},
+      {'4', "forty"},
+      {'5', "fifty"},
+      {'6', "sixty"},
+      {'7', "seventy"},
+      {'8', "eighty"},
+      {'9', "ninety"},
     };
 
     //constructor
-    public Numbers(int newNumber)
+    public Numbers(string newNumber)
     {
-      number = newNumber;
+      _number = newNumber;
     }
 
     //Getter
-    public int GetNumber()
+    public string GetNumber()
     {
-      return number;
+      return _number;
     }
 
+    //Main method
     public string NumberWord()
     {
-      foreach (KeyValuePair<int, string> pair in singleDict)
-      {
-        if (pair.Key == number)
+      char[] numberArray = GetNumber().ToCharArray();
+      string result = "";
+
+        if (numberArray.Length >1)
         {
-          return pair.Value;
+          foreach (KeyValuePair<char, string> pair in doubleDict)
+          {
+            if (pair.Key == numberArray[numberArray.Length-2])
+            {
+              result += pair.Value + " ";
+            }
+          }
         }
-      }
-      return "error";
+        foreach (KeyValuePair<char, string> pair in singleDict)
+        {
+          if (pair.Key == numberArray[numberArray.Length-1])
+          {
+            result += pair.Value;
+          }
+        }
+      return result;
     }
   }
 }
