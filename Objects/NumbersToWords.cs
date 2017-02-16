@@ -45,6 +45,19 @@ namespace NumbersApp.Objects
       {'9', "nine hundred"},
     };
 
+    public static Dictionary<char, string> teenDict = new Dictionary<char, string>()
+    {
+      {'1', "eleven"},
+      {'2', "twelve"},
+      {'3', "thirteen"},
+      {'4', "forteen"},
+      {'5', "fifteen"},
+      {'6', "sixteen"},
+      {'7', "seventeen"},
+      {'8', "eighteen"},
+      {'9', "nineteen"},
+    };
+
 
     //constructor
     public Numbers(string newNumber)

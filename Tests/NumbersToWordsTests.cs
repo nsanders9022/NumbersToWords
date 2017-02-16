@@ -50,5 +50,16 @@ namespace NumbersApp
       //Assert
       Assert.Equal("zero", newNumber.NumberWord());
     }
+
+    [Fact]
+    public void NumberWord_Teens_Word()
+    {
+      //Arrange
+      string teenDigit = "13";
+      //Act
+      Numbers newNumber = new Numbers(teenDigit);
+      //Assert
+      Assert.Equal("thirteen", newNumber.NumberWord());
+    }
   }
 }
