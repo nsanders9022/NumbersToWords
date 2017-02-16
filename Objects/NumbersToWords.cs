@@ -9,7 +9,6 @@ namespace NumbersApp.Objects
     public string _number;
     public static Dictionary<char, string> singleDict = new Dictionary<char, string>()
     {
-      {'0', ""},
       {'1', "one"},
       {'2', "two"},
       {'3', "three"},
@@ -75,42 +74,63 @@ namespace NumbersApp.Objects
     public string NumberWord()
     {
       char[] numberArray = GetNumber().ToCharArray();
-      string result = "";
+      string ones = "";
+      string tens = "";
+      string hundreds = "";
+      // string result = hundreds + tens + ones;
 
+      //Hundreds
       if (numberArray.Length >2)
       {
         foreach (KeyValuePair<char, string> pair in hundredDict)
         {
           if (pair.Key == numberArray[numberArray.Length-3])
           {
-            result += pair.Value + " ";
+            hundreds = pair.Value + " ";
+            Console.WriteLine(hundreds);
           }
         }
       }
 
-      if (numberArray.Length >1)
+      //Zero
+      if ((numberArray.Length == 1) && (numberArray[0] == '0'))
+      {
+        ones = "zero";
+      }
+
+      //Ones
+      foreach (KeyValuePair<char, string> pair in singleDict)
+      {
+        if (pair.Key == numberArray[numberArray.Length-1])
+        {
+          ones = pair.Value;
+        }
+      }
+
+      //Tens (Not Teens)
+      if (numberArray.Length >1 && (numberArray[numberArray.Length -2] != '1'))
       {
         foreach (KeyValuePair<char, string> pair in doubleDict)
         {
           if (pair.Key == numberArray[numberArray.Length-2])
           {
-            result += pair.Value + " ";
+            tens = pair.Value + " ";
           }
         }
       }
-      if ((numberArray.Length == 1) && (numberArray[0] == '0'))
+      else if (numberArray.Length >1)
       {
-        result = "zero";
-      }
-
-      foreach (KeyValuePair<char, string> pair in singleDict)
-      {
-        if (pair.Key == numberArray[numberArray.Length-1])
+        foreach (KeyValuePair<char, string> pair in teenDict)
         {
-          result += pair.Value;
+          if (pair.Key == numberArray[numberArray.Length-1])
+          {
+            tens = pair.Value;
+            ones = "";
+          }
         }
       }
-      return result;
+
+      return hundreds + tens + ones;
     }
   }
 }
